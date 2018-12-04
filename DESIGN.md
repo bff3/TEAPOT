@@ -1,16 +1,16 @@
-mongoDB:
---example--
-{
-  Id: 35673575
-  Type: ("Due date" or "Work date"),
-  Day: "Friday",
-  Class: "cs336",
-  Title: "Project2",
-  Description: "expand proposal",
-  Subtask: {"larger description", "reactJS frontend", "MongoDB backend"},
-  Urgency: ("urgent" or "not urgent"),
-  Complete: ("yes" or "no")
-}
+mongoDB:</br>
+--example--</br>
+{</br>
+  Id: 35673575 </br>
+  Type: ("Due date" or "Work date"),</br>
+  Day: "Friday",</br>
+  Class: "cs336",</br>
+  Title: "Project2",</br>
+  Description: "expand proposal",</br>
+  Subtask: {"larger description", "reactJS frontend", "MongoDB backend"},</br>
+  Urgency: ("urgent" or "not urgent"),</br>
+  Complete: ("yes" or "no")</br>
+}</br>
 
 reactJS:
 --layout--
