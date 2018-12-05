@@ -1,6 +1,6 @@
-Project:Tracking Every Assignment: Progress Over Time
-Codename: .sendstatus(418)
-Dem Bois: Sean Jacobsma, Ben Fynan, Jorden Hordyk
+Project:Tracking Every Assignment: Progress Over Time</br>
+Codename: .sendstatus(418)</br>
+Dem Bois: Sean Jacobsma, Ben Fynan, Jorden Hordyk</br>
 
 Our idea for our web app is a homework planner. Most todo lists have a system set up to allow
 the addition of an item to the list, and a function to remove the item when it is done.
