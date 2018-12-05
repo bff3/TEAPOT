@@ -1,4 +1,4 @@
-<pre>
+
 mongoDB:</br>
 --example--</br>
 {</br>
@@ -15,8 +15,9 @@ mongoDB:</br>
 
 reactJS:</br>
 --layout--</br>
-  __________                                                                  ____ ____ ____</br>
- / TEAPOT  x\                                                                | _  | #  | X  |</br>
+<pre>
+  __________                                                                  ____ ____ ____
+ / TEAPOT  x\                                                                | _  | #  | X  |
 |*******************************************************************************************|</br>
 | Tracking Every Assignment:                                                                |</br>
 | Progress Over Time!                                                                       |</br>
