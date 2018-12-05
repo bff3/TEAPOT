@@ -52,7 +52,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/api/comments', function(req, res) {
+app.get('/api/tasks', function(req, res) {
     db.collection("project").find({}).toArray(function(err, result){
       if (err) throw err
         data = result
@@ -62,10 +62,10 @@ app.get('/api/comments', function(req, res) {
 
 });
 
-app.post('/api/comments', function(req, res) {
+app.post('/api/tasks', function(req, res) {
     var collection = db.collection('project');
 
-    collection.insertOne({"id":Date.now(), "author":req.body.author, "text":req.body.text });
+    collection.insertOne({"id":Date.now(), "Type": req.body.type, "Day": req.body.day, "Class": req.body.class, "Title": req.bod.title, "Description":req.body.description, "Urgency": req.body.urgency, "Complete": req.body.complete});
 
     db.collection('project').find().toArray(function (err, result){
       if (err) throw err;
@@ -76,14 +76,14 @@ app.post('/api/comments', function(req, res) {
     })
 });
 
-app.get('/api/comments/:id', function(req, res) {
+app.get('/api/tasks/:id', function(req, res) {
     db.collection('project').find({"id": Number(req.params.id)}).toArray(function(err, docs) {
         if (err) throw err;
         res.json(docs);
     });
 });
 
-app.put('/api/comments/:id', function(req, res) {
+app.put('/api/tasks/:id', function(req, res) {
     var updateId = Number(req.params.id);
     var update = req.body;
     db.collection('project').updateOne(
