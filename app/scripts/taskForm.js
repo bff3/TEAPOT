@@ -8,7 +8,7 @@ import '../css/base.css';
 
 module.exports = React.createClass({
   getInitialState: function(){
-    return {Type: '', Day:'', Class:'', Title: '', Description:'', Urgency: ''};
+    return {Type: '', Day:'', Class:'', Title: '', Description:'', Urgency: '', Complete: 'NotComplete'};
   },
   handleTypeChange: function(e) {
     this.setState({Type: e.target.value});
@@ -28,9 +28,7 @@ module.exports = React.createClass({
   handleUrgencyChange: function(e) {
     this.setState({Ungency: e.target.value})
   },
-  handleCompleteChange: function(e) {
-    this.setState({Complete: e.target.value})
-  },
+
   handleSubmit: function(e) {
     e.preventDefault();
     var Type = this.state.Type.trim();
@@ -39,12 +37,11 @@ module.exports = React.createClass({
     var Title = this.state.Title.trim();
     var Description = this.state.Description.trim();
     var Urgency = this.state.Urgency.trim();
-    var Complete = this.state.Complete.trim();
     if(!Type || !Day || !Class || !Title || !Description || !Urgency){
       return;
     }
     this.props.onCommentSubmit({Type: Type, Day: Day, Class: Class, Title: Title, Description: Description, Urgency: Urgency});
-    this.setState({Type: '', Day:'', Class:'', Title: '', Description:'', Urgency: ''});
+    this.setState({Type: '', Day:'', Class:'', Title: '', Description:'', Urgency: '', Complete: 'NotComplete'});
   },
   render: function() {
     return (

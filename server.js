@@ -98,7 +98,7 @@ app.put('/api/tasks/:id', function(req, res) {
         });
 });
 
-app.delete('/api/comments/:id', function(req, res) {
+app.delete('/api/tasks/:id', function(req, res) {
     db.collection('project').deleteOne(
         {'Id': Number(req.params.id)},
         function(err, result) {
