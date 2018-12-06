@@ -17,11 +17,7 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div className="task">
-        <h2 className="taskTitle">
-          {this.props.title}
-        </h2>
-        <span dangerouslySetInnerHTML={this.rawMarkup()} />
-        <Link to={'/' + this.props.id}>Veiw and Edit</Link>
+        <Link to={'/' + this.props.id}>{this.props.Title}</Link>
       </div>
     );
   }

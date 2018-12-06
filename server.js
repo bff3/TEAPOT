@@ -65,7 +65,7 @@ app.get('/api/tasks', function(req, res) {
 app.post('/api/tasks', function(req, res) {
     var collection = db.collection('project');
 
-    collection.insertOne({"id":Date.now(), "Type": req.body.type, "Day": req.body.day, "Class": req.body.class, "Title": req.bod.title, "Description":req.body.description, "Urgency": req.body.urgency, "Complete": req.body.complete});
+    collection.insertOne({"Id":Date.now(), "Type": req.body.type, "Day": req.body.day, "Class": req.body.class, "Title": req.bod.title, "Description":req.body.description, "Urgency": req.body.urgency, "Complete": "NotComplete"});
 
     db.collection('project').find().toArray(function (err, result){
       if (err) throw err;
@@ -77,7 +77,7 @@ app.post('/api/tasks', function(req, res) {
 });
 
 app.get('/api/tasks/:id', function(req, res) {
-    db.collection('project').find({"id": Number(req.params.id)}).toArray(function(err, docs) {
+    db.collection('project').find({"Id": Number(req.params.id)}).toArray(function(err, docs) {
         if (err) throw err;
         res.json(docs);
     });
@@ -100,7 +100,7 @@ app.put('/api/tasks/:id', function(req, res) {
 
 app.delete('/api/comments/:id', function(req, res) {
     db.collection('project').deleteOne(
-        {'id': Number(req.params.id)},
+        {'Id': Number(req.params.id)},
         function(err, result) {
             if (err) throw err;
             db.collection("project").find({}).toArray(function(err, docs) {
