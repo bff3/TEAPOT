@@ -1,0 +1,7 @@
+div.DailyTaskList {
+  display: inline-block;
+}
+div.task {
+  padding: 1em;
+  border: solid 0.01em;
+}
