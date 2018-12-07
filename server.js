@@ -53,11 +53,39 @@ app.use(function(req, res, next) {
 });
 
 app.get('/api/tasks', function(req, res) {
-    db.collection("project").find({}).toArray(function(err, result){
+    var completed, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday;
+    db.collection("project").find({"Complete":"Yes"}).toArray(function(err, result){
       if (err) throw err
-        data = result
+        completed = result;
     })
-
+    db.collection("project").find({"Complete":"No","Day":"Monday"}).toArray(function(err, result){
+      if (err) throw err
+        Monday = result;
+    })
+    db.collection("project").find({"Complete":"No","Day":"Tuesday"}).toArray(function(err, result){
+      if (err) throw err
+        Tuesday = result;
+    })
+    db.collection("project").find({"Complete":"No","Day":"Wednesday"}).toArray(function(err, result){
+      if (err) throw err
+        Wednesday = result;
+    })
+    db.collection("project").find({"Complete":"No","Day":"Friday"}).toArray(function(err, result){
+      if (err) throw err
+        Friday = result;
+    })
+    db.collection("project").find({"Complete":"No","Day":"Saturday"}).toArray(function(err, result){
+      if (err) throw err
+        Saturday = result;
+    })
+    db.collection("project").find({"Complete":"No","Day":"Sunday"}).toArray(function(err, result){
+      if (err) throw err
+        Sunday = result;
+    })
+    data = {
+      "weeklyTaskList": [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday],
+      "completedTasks": completed
+    };
       res.json(data);
 
 });
@@ -65,7 +93,7 @@ app.get('/api/tasks', function(req, res) {
 app.post('/api/tasks', function(req, res) {
     var collection = db.collection('project');
 
-    collection.insertOne({"id":Date.now(), "Type": req.body.Type, "Day": req.body.Day, "Class": req.body.Class, "Title": req.bod.Title, "Description":req.body.Description, "Urgency": req.body.Urgency, "Complete": "NotComplete"});
+    collection.insertOne({"id":Date.now(), "Type": req.body.Type, "Day": req.body.Day, "Class": req.body.Class, "Title": req.bod.Title, "Description":req.body.Description, "Urgency": req.body.Urgency, "Complete": "No"});
 
     db.collection('project').find().toArray(function (err, result){
       if (err) throw err;
