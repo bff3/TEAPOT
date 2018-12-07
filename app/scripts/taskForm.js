@@ -41,7 +41,7 @@ module.exports = React.createClass({
       return;
     }
     this.props.onTaskSubmit({Type: Type, Day: Day, Class: Class, Title: Title, Description: Description, Urgency: Urgency});
-    this.setState({Type: '', Day:'', Class:'', Title: '', Description:'', Urgency: '', Complete: 'NotComplete'});
+    this.setState({Type: '', Day:'', Class:'', Title: '', Description:'', Urgency: '', Complete: 'No'});
   },
   render: function() {
     return (

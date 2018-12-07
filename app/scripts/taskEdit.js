@@ -7,7 +7,7 @@ import {API_URL} from './global';
 
 module.exports = React.createClass({
     getInitialState: function () {
-        return {Type: '', Day:'', Class:'', Title: '', Description:'', Urgency: '', Complete: 'Notcomplete'};
+        return {Type: '', Day:'', Class:'', Title: '', Description:'', Urgency: '', Complete: 'No'};
     },
     componentDidMount: function () {
         this.loadData();
@@ -49,7 +49,7 @@ module.exports = React.createClass({
       this.setState({Ungency: e.target.value})
     },
     handleComplete: function(e) {
-      this.setState({Complete: 'Complete'})
+      this.setState({Complete: 'Yes'})
     },
     contextTypes: {
         router: React.PropTypes.object
