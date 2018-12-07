@@ -5,6 +5,13 @@
   <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
   <style>
+    div.DailyTaskList {
+      display: inline-block;
+    }
+    div.task {
+      padding: 1em;
+      border: solid 0.01em;
+    }
   </style>
 </head>
 
@@ -16,7 +23,7 @@ class WeeklyCalendar extends React.Component {
   render() {
     var days = this.props.WeeklyList.map(function (day){
         return(
-          <DailyTaskList DailyList={day} />
+          <DailyTaskList key={JSON.stringify(day)} DailyList={day} />
         );
       });
     return (
@@ -26,12 +33,11 @@ class WeeklyCalendar extends React.Component {
     );
   }
 }
-
 class DailyTaskList extends React.Component {
   render() {
-    var tasks = this.props.DailyList.map(function (title){
+    var tasks = this.props.DailyList.map(function (task){
         return(
-          <Task title={title} />
+          <Task key={task.Title} Title={task.Title} />
         );
       });
     return (
@@ -41,20 +47,25 @@ class DailyTaskList extends React.Component {
     );
   }
 }
-
-
-
       class Task extends React.Component {
         render() {
           return (
             <div className="Task">
-              <li>{ this.props.Title }</li>
+              <tr>
+                { this.props.Title }
+                <br />
+                <a href="/">Edit</a> //replace with link to object specific page
+              </tr>
             </div>
           );
         }
       }
-
-      ReactDOM.render(<WeeklyCalendar WeeklyList={[["one","two","three"],["ein","swei","drei"],["un","deux","treis"]]} />, document.getElementById('root'))
+      ReactDOM.render(
+        <WeeklyCalendar WeeklyList={[[],[],[],[{"_id":"5c071a01fb6fc038cbb343e3","id":"00000001","Type":"Due date","Day":"Friday","Class":"cs336","Title":"Project2","Description":"expand proposal","Urgency":"urgent","Complete":"No"}],[],[]]} />,
+        //<DailyTaskList DailyList={[{"_id":"5c071a01fb6fc038cbb343e3","id":"00000001","Type":"Due date","Day":"Friday","Class":"cs336","Title":"Project2","Description":"expand proposal","Urgency":"urgent","Complete":"No"},
+        //                          {"_id":"5c071a01fb6fc038cbb343e3","id":"00000002","Type":"Due date","Day":"Friday","Class":"cs336","Title":"Project3","Description":"expand proposal","Urgency":"urgent","Complete":"No"}]} />,
+        document.getElementById('root')
+      )
     </script>
 </body>
 

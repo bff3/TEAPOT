@@ -4,8 +4,8 @@ import Remarkable from 'remarkable';
 import $ from 'jquery';
 
 import '../css/base.css';
-import weeklyTaskList from './weeklyTaskList';
-import taskForm from './taskForm';
+import WeeklyTaskList from './WeeklyTaskList';
+import TaskForm from './taskForm';
 import {API_URL, POLL_INTERVAL} from './global';
 
 
@@ -59,12 +59,13 @@ module.exports = React.createClass({
     this.state._isMounted = false;
   },
   render: function() {
+    console.log(JSON.stringify(this.state.data));
     return (
       <div className="Weekly Calendar">
         <h1>Tracking Every Assignment:</h1>
         <h2>Progress Over Time!</h2>
-        <WeeklyTaskList data={this.state.data} />
-        <taskForm onTaskSubmit= {this.handleTaskSubmit}/>
+        <WeeklyTaskList WeeklyList={this.state.data.weeklyTaskList} />
+        <TaskForm onTaskSubmit= {this.handleTaskSubmit}/>
       </div>
     );
   }

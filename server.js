@@ -16,25 +16,14 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var app = express();
-var data;
+var data = {
+    "weeklyTaskList": [],
+    "completedTasks": []
+  };
 var db;
 var MongoPassword = process.env.MONGO_PASSWORD;
 var APP_PATH = path.join(__dirname, 'dist');
 
-
-
-MongoClient.connect('mongodb://cs336:' + MongoPassword + '@ds155653.mlab.com:55653/cs336', function (err, client){
-  if (err) {throw err;}
-
-  db = client.db('cs336')
-
-  db.collection('project').find().toArray(function (err, result){
-    if (err) throw err
-
-    data = result;
-  })
-
-});
 
 app.set('port', (process.env.PORT || 3000));
 app.use('/', express.static(APP_PATH));
@@ -53,41 +42,40 @@ app.use(function(req, res, next) {
 });
 
 app.get('/api/tasks', function(req, res) {
-    var completed, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday;
-    db.collection("project").find({"Complete":"Yes"}).toArray(function(err, result){
-      if (err) throw err
-        completed = result;
-    })
-    db.collection("project").find({"Complete":"No","Day":"Monday"}).toArray(function(err, result){
-      if (err) throw err
-        Monday = result;
-    })
-    db.collection("project").find({"Complete":"No","Day":"Tuesday"}).toArray(function(err, result){
-      if (err) throw err
-        Tuesday = result;
-    })
-    db.collection("project").find({"Complete":"No","Day":"Wednesday"}).toArray(function(err, result){
-      if (err) throw err
-        Wednesday = result;
-    })
-    db.collection("project").find({"Complete":"No","Day":"Friday"}).toArray(function(err, result){
-      if (err) throw err
-        Friday = result;
-    })
-    db.collection("project").find({"Complete":"No","Day":"Saturday"}).toArray(function(err, result){
-      if (err) throw err
-        Saturday = result;
-    })
-    db.collection("project").find({"Complete":"No","Day":"Sunday"}).toArray(function(err, result){
-      if (err) throw err
-        Sunday = result;
-    })
-    data = {
-      "weeklyTaskList": [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday],
-      "completedTasks": completed
+  db.collection("project").find({"Complete":"Yes"}).toArray(function(err, result){
+    if (err) throw err
+      data.completedTasks = result;
+  })
+  db.collection("project").find({"Complete":"No","Day":"Monday"}).toArray(function(err, result){
+    if (err) throw err
+      data.weeklyTaskList.push(result);
+  })
+  db.collection("project").find({"Complete":"No","Day":"Tuesday"}).toArray(function(err, result){
+    if (err) throw err
+      data.weeklyTaskList.push(result);
+  })
+  db.collection("project").find({"Complete":"No","Day":"Wednesday"}).toArray(function(err, result){
+    if (err) throw err
+      data.weeklyTaskList.push(result);
+  })
+  db.collection("project").find({"Complete":"No","Day":"Friday"}).toArray(function(err, result){
+    if (err) throw err
+    data.weeklyTaskList.push(result);
+  })
+  db.collection("project").find({"Complete":"No","Day":"Saturday"}).toArray(function(err, result){
+    if (err) throw err
+      data.weeklyTaskList.push(result);
+  })
+  db.collection("project").find({"Complete":"No","Day":"Sunday"}).toArray(function(err, result){
+    if (err) throw err
+      data.weeklyTaskList.push(result);
+  })
+  console.log(JSON.stringify(data));
+  res.json(data);
+  data = {
+      "weeklyTaskList": [],
+      "completedTasks": []
     };
-      res.json(data);
-
 });
 
 app.post('/api/tasks', function(req, res) {
@@ -151,5 +139,17 @@ app.delete('/api/tasks/:id', function(req, res) {
 app.use('*', express.static(APP_PATH));
 
 app.listen(app.get('port'), function() {
+  MongoClient.connect('mongodb://cs336:' + MongoPassword + '@ds155653.mlab.com:55653/cs336', function (err, client){
+    if (err) {throw err;}
+
+    db = client; //.db('cs336')
+    /*
+    db.collection('project').find().toArray(function (err, result){
+      if (err) throw err
+
+      data = result;
+    })
+*/
+  });
     console.log('Server started: http://localhost:' + app.get('port') + '/');
 });

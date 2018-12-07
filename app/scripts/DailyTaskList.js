@@ -1,10 +1,11 @@
-import task from './task';
+import React from 'react';
+import Task from './Task';
 
 module.exports = React.createClass({
   render: function() {
-    var tasks = this.props.DailyList.map(function (title){
+    var tasks = this.props.DailyList.map(function (task){
         return(
-          <task title={title} />
+          <Task key={task.Title} Title={task.Title} />
         );
       });
     return (
