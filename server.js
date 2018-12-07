@@ -65,7 +65,7 @@ app.get('/api/tasks', function(req, res) {
 app.post('/api/tasks', function(req, res) {
     var collection = db.collection('project');
 
-    collection.insertOne({"Id":Date.now(), "Type": req.body.type, "Day": req.body.day, "Class": req.body.class, "Title": req.bod.title, "Description":req.body.description, "Urgency": req.body.urgency, "Complete": "NotComplete"});
+    collection.insertOne({"Id":Date.now(), "Type": req.body.Type, "Day": req.body.Day, "Class": req.body.Class, "Title": req.bod.Title, "Description":req.body.Description, "Urgency": req.body.Urgency, "Complete": "NotComplete"});
 
     db.collection('project').find().toArray(function (err, result){
       if (err) throw err;
@@ -86,7 +86,17 @@ app.get('/api/tasks/:id', function(req, res) {
 app.put('/api/tasks/:id', function(req, res) {
     var updateId = Number(req.params.id);
     var update = req.body;
-    db.collection('project').updateOne(
+    db.collection('project').find({"Id": Number(req.params.id)}).toArray(function(err, docs){
+      if (err) throw err;
+      if (docs.count() == 1){
+        if (update.Complete == "Complete"){
+          db.collection('completed').insertOne({update});
+          db.collection('project').deleteOne({"Id": updateID});
+        }
+      }
+    })
+
+/*    db.collection('project').updateOne(
         { id: updateId },
         { $set: update },
         function(err, result) {
@@ -95,7 +105,7 @@ app.put('/api/tasks/:id', function(req, res) {
                 if (err) throw err;
                 res.json(docs);
             });
-        });
+        });*/
 });
 
 app.delete('/api/tasks/:id', function(req, res) {

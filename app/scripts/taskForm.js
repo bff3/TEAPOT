@@ -40,7 +40,7 @@ module.exports = React.createClass({
     if(!Type || !Day || !Class || !Title || !Description || !Urgency){
       return;
     }
-    this.props.onCommentSubmit({Type: Type, Day: Day, Class: Class, Title: Title, Description: Description, Urgency: Urgency});
+    this.props.onTaskSubmit({Type: Type, Day: Day, Class: Class, Title: Title, Description: Description, Urgency: Urgency});
     this.setState({Type: '', Day:'', Class:'', Title: '', Description:'', Urgency: '', Complete: 'NotComplete'});
   },
   render: function() {
