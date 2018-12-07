@@ -114,7 +114,7 @@ app.get('/api/tasks/:id', function(req, res) {
 app.put('/api/tasks/:id', function(req, res) {
     var updateId = Number(req.params.id);
     var update = req.body;
-    db.collection('project').find({"id": Number(req.params.id)}).toArray(function(err, docs){
+/*    db.collection('project').find({"id": Number(req.params.id)}).toArray(function(err, docs){
       if (err) throw err;
       if (docs.count() == 1){
         if (update.Complete == "Complete"){
@@ -122,9 +122,9 @@ app.put('/api/tasks/:id', function(req, res) {
           db.collection('project').deleteOne({"id": updateID});
         }
       }
-    })
+    })*/
 
-/*    db.collection('project').updateOne(
+    db.collection('project').updateOne(
         { id: updateId },
         { $set: update },
         function(err, result) {
@@ -133,7 +133,7 @@ app.put('/api/tasks/:id', function(req, res) {
                 if (err) throw err;
                 res.json(docs);
             });
-        });*/
+        });
 });
 
 app.delete('/api/tasks/:id', function(req, res) {

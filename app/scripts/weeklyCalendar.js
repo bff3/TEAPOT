@@ -6,7 +6,6 @@ import $ from 'jquery';
 import '../css/base.css';
 import weeklyTaskList from './weeklyTaskList';
 import taskForm from './taskForm';
-import completedList from './completedList'
 import {API_URL, POLL_INTERVAL} from './global';
 
 
