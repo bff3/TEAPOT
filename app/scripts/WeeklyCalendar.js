@@ -5,13 +5,16 @@ import $ from 'jquery';
 
 import '../css/base.css';
 import WeeklyTaskList from './WeeklyTaskList';
-import TaskForm from './taskForm';
+import TaskForm from './TaskForm';
 import {API_URL, POLL_INTERVAL} from './global';
 
 
 module.exports = React.createClass({
   getInitialState: function(){
-    return { data: [], _isMounted: false};
+    return { data: {
+        "weeklyTaskList": [],
+        "completedTasks": []
+      }, _isMounted: false};
   },
   loadTasksFromServer: function() {
     if (this.state._isMounted) {

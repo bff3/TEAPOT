@@ -45,7 +45,7 @@ module.exports = React.createClass({
   },
   render: function() {
     return (
-      <form className="taskForm" onSubmit = {this.handleSubmit}>
+      <form className="TaskForm" onSubmit = {this.handleSubmit}>
         <select
           selected = "Type of event"
           value = {this.state.Type}

@@ -92,7 +92,7 @@ module.exports = React.createClass({
     render: function () {
         return (
             <div>
-                <form className="CommentForm">
+                <form className="TaskEdit">
                     <h1>Comment Edit - {this.props.params.id}</h1>
                     <input
                         type="text"
