@@ -58,6 +58,10 @@ app.get('/api/tasks', function(req, res) {
     if (err) throw err
       data.weeklyTaskList.push(result);
   })
+  db.collection("project").find({"Complete":"No","Day":"Thursday"}).toArray(function(err, result){
+    if (err) throw err
+      data.weeklyTaskList.push(result);
+  })
   db.collection("project").find({"Complete":"No","Day":"Friday"}).toArray(function(err, result){
     if (err) throw err
     data.weeklyTaskList.push(result);
