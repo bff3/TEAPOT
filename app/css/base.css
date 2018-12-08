@@ -57,3 +57,10 @@ p, ul {
 ul {
   padding-left: 30px;
 }
+div.DailyTaskList {
+  display: inline;
+}
+div.Task {
+  padding: 1em;
+  border: solid 0.01em;
+}

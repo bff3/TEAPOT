@@ -26,18 +26,18 @@ module.exports = React.createClass({
     this.setState({Description: e.target.value})
   },
   handleUrgencyChange: function(e) {
-    this.setState({Ungency: e.target.value})
+    this.setState({Urgency: e.target.value})
   },
 
   handleSubmit: function(e) {
     console.log("taskform handleSubmit is called")
     e.preventDefault();
-    var Type = this.state.Type.trim();
-    var Day = this.state.Day.trim();
+    var Type = this.state.Type;
+    var Day = this.state.Day;
     var Class = this.state.Class.trim();
     var Title = this.state.Title.trim();
     var Description = this.state.Description.trim();
-    var Urgency = this.state.Urgency.trim();
+    var Urgency = this.state.Urgency;
     /*
     if(!Type || !Day || !Class || !Title || !Description || !Urgency){
       console.log('heloo is me, BOris')
@@ -51,17 +51,19 @@ module.exports = React.createClass({
     return (
       <form className="TaskForm" onSubmit = {this.handleSubmit}>
         <select
-          selected = "Type of event"
+          selected = ""
           value = {this.state.Type}
           onChange={this.handleTypeChange}>
+            <option value="">select type</option>
             <option value="Due">Due Date</option>
             <option value= "Work"> Work Date</option>
         </select>
 
         <select
-          selected = "Day"
+          selected = ""
           value = {this.state.Day}
           onChange={this.handleDayChange}>
+            <option value= "">select day</option>
             <option value= "Sunday">Sunday</option>
             <option value= "Monday">Monday</option>
             <option value= "Tuesday">Tuesday</option>
@@ -93,9 +95,10 @@ module.exports = React.createClass({
         />
 
         <select
-          selected = "Urgency"
-          value = {this.state.Type}
-          onChange={this.handleTypeChange}>
+          selected = ""
+          value = {this.state.Urgency}
+          onChange={this.handleUrgencyChange}>
+            <option value="">select urgency</option>
             <option value="Urgent">Urgent</option>
             <option value= "NotUgent"> Not urgent</option>
         </select>

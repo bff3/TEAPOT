@@ -54,13 +54,14 @@ module.exports = React.createClass({
         router: React.PropTypes.object
     },
     handleUpdate: function () {
+        console.log(this.state.Class)
         var updatedComment = {
-            Type: this.state.Type.trim(),
-            Day: this.state.Day.trim(),
-            Class: this.state.Class.Trim(),
-            Title: this.state.Title.Trim(),
-            Description: this.state.Description.Trim(),
-            Urgency: this.state.Urgency.Trim(),
+            Type: this.state.Type,
+            Day: this.state.Day,
+            Class: this.state.Class.trim(),
+            Title: this.state.Title.trim(),
+            Description: this.state.Description.trim(),
+            Urgency: this.state.Urgency,
 
         };
         $.ajax({
@@ -93,17 +94,61 @@ module.exports = React.createClass({
         return (
             <div>
                 <form className="TaskEdit">
-                    <h1>Comment Edit - {this.props.params.id}</h1>
+                    <h1>{this.props.params.Title}</h1>
+                    <select
+                      selected = ""
+                      value = {this.state.Type}
+                      onChange={this.handleTypeChange}>
+                        <option value="">select type</option>
+                        <option value="Due">Due Date</option>
+                        <option value= "Work"> Work Date</option>
+                    </select>
+
+                    <select
+                      selected = ""
+                      value = {this.state.Day}
+                      onChange={this.handleDayChange}>
+                        <option value= "">select day</option>
+                        <option value= "Sunday">Sunday</option>
+                        <option value= "Monday">Monday</option>
+                        <option value= "Tuesday">Tuesday</option>
+                        <option value= "Wednesday">Wednesday</option>
+                        <option value= "Thursday">Thursday</option>
+                        <option value= "Friday">Friday</option>
+                        <option value= "Saturday">Saturday</option>
+                    </select>
+
                     <input
-                        type="text"
-                        value={this.state.author}
-                        onChange={this.handleAuthorChange}
+                      type = "text"
+                      placeholder = "Title of Task"
+                      value = {this.state.Title}
+                      onChange={this.handleTitleChange}
                     />
+
                     <input
-                        type="text"
-                        value={this.state.text}
-                        onChange={this.handleTextChange}
+                      type = "text"
+                      placeholder = "Class"
+                      value = {this.state.Class}
+                      onChange={this.handleClassChange}
                     />
+
+                    <input
+                      type = "text"
+                      placeholder = "Description"
+                      value = {this.state.Description}
+                      onChange={this.handleDescriptionChange}
+                    />
+
+                    <select
+                      selected = ""
+                      value = {this.state.Urgency}
+                      onChange={this.handleUrgencyChange}>
+                        <option value="">select urgency</option>
+                        <option value="Urgent">Urgent</option>
+                        <option value= "NotUgent"> Not urgent</option>
+                    </select>
+                    
+                    <br/>
                     <button type="button" onClick={this.handleUpdate}>Update
                     </button>
                     <button type="button" onClick={this.handleComplete}>Mark Completed

@@ -48,31 +48,31 @@ app.get('/api/tasks', function(req, res) {
   })
   db.collection("project").find({"Complete":"No","Day":"Monday"}).toArray(function(err, result){
     if (err) throw err
-      data.weeklyTaskList.push(result);
+      data.weeklyTaskList.push({"id":0, "Day":"Monday", "DailyList":result});
   })
   db.collection("project").find({"Complete":"No","Day":"Tuesday"}).toArray(function(err, result){
     if (err) throw err
-      data.weeklyTaskList.push(result);
+      data.weeklyTaskList.push({"id":1, "Day":"Tuesday", "DailyList":result});
   })
   db.collection("project").find({"Complete":"No","Day":"Wednesday"}).toArray(function(err, result){
     if (err) throw err
-      data.weeklyTaskList.push(result);
+      data.weeklyTaskList.push({"id":2, "Day":"Wednesday", "DailyList":result});
   })
   db.collection("project").find({"Complete":"No","Day":"Thursday"}).toArray(function(err, result){
     if (err) throw err
-      data.weeklyTaskList.push(result);
+      data.weeklyTaskList.push({"id":3, "Day":"Thursday", "DailyList":result});
   })
   db.collection("project").find({"Complete":"No","Day":"Friday"}).toArray(function(err, result){
     if (err) throw err
-    data.weeklyTaskList.push(result);
+    data.weeklyTaskList.push({"id":4, "Day":"Friday", "DailyList":result});
   })
   db.collection("project").find({"Complete":"No","Day":"Saturday"}).toArray(function(err, result){
     if (err) throw err
-      data.weeklyTaskList.push(result);
+      data.weeklyTaskList.push({"id":5, "Day":"Saturday", "DailyList":result});
   })
   db.collection("project").find({"Complete":"No","Day":"Sunday"}).toArray(function(err, result){
     if (err) throw err
-      data.weeklyTaskList.push(result);
+      data.weeklyTaskList.push({"id":6, "Day":"Sunday", "DailyList":result});
   })
   //console.log(JSON.stringify(data));
   res.json(data);
@@ -83,14 +83,15 @@ app.get('/api/tasks', function(req, res) {
 });
 
 app.post('/api/tasks', function(req, res) {
+    console.log(JSON.stringify(req.body));
     var collection = db.collection('project');
 
-    collection.insertOne({"id":Date.now(), "Type": req.body.Type, "Day": req.body.Day, "Class": req.body.Class, "Title": req.bod.Title, "Description":req.body.Description, "Urgency": req.body.Urgency, "Complete": "No"});
+    collection.insertOne({"id":Date.now(), "Type": req.body.Type, "Day": req.body.Day, "Class": req.body.Class, "Title": req.body.Title, "Description":req.body.Description, "Urgency": req.body.Urgency, "Complete": "No"});
 
     db.collection('project').find().toArray(function (err, result){
       if (err) throw err;
 
-        data = result;
+        //data = result;
         console.log(result);
         res.json(result);
     })
