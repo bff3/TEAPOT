@@ -5,7 +5,7 @@ module.exports = React.createClass({
   render: function() {
     var days = this.props.WeeklyList.map(function (day){
         return(
-          <DailyTaskList key={JSON.stringify(day)} DailyList={day} />
+          <DailyTaskList key={Date.now()} DailyList={day} />
         );
       });
     return (

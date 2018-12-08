@@ -74,7 +74,7 @@ app.get('/api/tasks', function(req, res) {
     if (err) throw err
       data.weeklyTaskList.push(result);
   })
-  console.log(JSON.stringify(data));
+  //console.log(JSON.stringify(data));
   res.json(data);
   data = {
       "weeklyTaskList": [],

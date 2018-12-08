@@ -30,6 +30,7 @@ module.exports = React.createClass({
   },
 
   handleSubmit: function(e) {
+    console.log("taskform handleSubmit is called")
     e.preventDefault();
     var Type = this.state.Type.trim();
     var Day = this.state.Day.trim();
@@ -37,9 +38,12 @@ module.exports = React.createClass({
     var Title = this.state.Title.trim();
     var Description = this.state.Description.trim();
     var Urgency = this.state.Urgency.trim();
+    /*
     if(!Type || !Day || !Class || !Title || !Description || !Urgency){
+      console.log('heloo is me, BOris')
       return;
     }
+    */
     this.props.onTaskSubmit({Type: Type, Day: Day, Class: Class, Title: Title, Description: Description, Urgency: Urgency});
     this.setState({Type: '', Day:'', Class:'', Title: '', Description:'', Urgency: '', Complete: 'No'});
   },
@@ -58,7 +62,7 @@ module.exports = React.createClass({
           selected = "Day"
           value = {this.state.Day}
           onChange={this.handleDayChange}>
-            <option value="Sunday">Sunday</option>
+            <option value= "Sunday">Sunday</option>
             <option value= "Monday">Monday</option>
             <option value= "Tuesday">Tuesday</option>
             <option value= "Wednesday">Wednesday</option>
@@ -76,16 +80,16 @@ module.exports = React.createClass({
 
         <input
           type = "text"
-          placeholder = "Title of Task"
+          placeholder = "Class"
           value = {this.state.Class}
           onChange={this.handleClassChange}
         />
 
         <input
           type = "text"
-          placeholder = "Title of Task"
-          value = {this.state.Title}
-          onChange={this.handleTitleChange}
+          placeholder = "Description"
+          value = {this.state.Description}
+          onChange={this.handleDescriptionChange}
         />
 
         <select
