@@ -12,7 +12,7 @@ module.exports = React.createClass({
         });
       days.sort(function(a,b){return a.key - b.key})
     }
-    console.log(days);
+    //console.log(days);
     return (
       <div className="WeeklyCalendar">
         {days}

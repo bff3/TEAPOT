@@ -45,10 +45,10 @@ module.exports = React.createClass({
       this.setState({Description: e.target.value})
     },
     handleUrgencyChange: function(e) {
-      this.setState({Ungency: e.target.value})
+      this.setState({Urgency: e.target.value})
     },
     handleComplete: function(e) {
-      this.setState({Complete: 'Yes'})
+      this.setState({Complete: e.target.value})
     },
     contextTypes: {
         router: React.PropTypes.object
@@ -62,6 +62,7 @@ module.exports = React.createClass({
             Title: this.state.Title.trim(),
             Description: this.state.Description.trim(),
             Urgency: this.state.Urgency,
+            Complete: this.state.Complete
 
         };
         $.ajax({
@@ -147,12 +148,18 @@ module.exports = React.createClass({
                         <option value="Urgent">Urgent</option>
                         <option value= "NotUgent"> Not urgent</option>
                     </select>
-                    
+
                     <br/>
                     <button type="button" onClick={this.handleUpdate}>Update
                     </button>
-                    <button type="button" onClick={this.handleComplete}>Mark Completed
-                    </button>
+                    <select
+                      selected = ""
+                      value = {this.state.Complete}
+                      onChange={this.handleComplete}>
+                        <option value="">Select Completion</option>
+                        <option value="Yes">Complete</option>
+                        <option value="No">Not Complete</option>
+                    </select>
                     <button type="button" onClick={this.handleDelete}>Delete
                     </button>
                 </form>
