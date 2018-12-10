@@ -8,9 +8,9 @@ mongoDB:</br>
   Class: "cs336",</br>
   Title: "Project2",</br>
   Description: "expand proposal",</br>
-  Subtask: {"larger description", "reactJS frontend", "MongoDB backend"},</br>
+  Subtask: {"larger description", "reactJS frontend", "MongoDB backend"},--removed--</br>
   Urgency: ("urgent" or "not urgent"),</br>
-  Complete: ("yes" or "no")</br>
+  Complete: ("Yes" or "No")</br>
 }</br>
 
 reactJS:</br>
@@ -69,10 +69,6 @@ reactJS:</br>
 |        |       |    |    in mongoDB as props      |    |      |        |
 |        |       |    | -renders them using JSX     |    |      |        |
 |        |       |    |                             |    |      |        |
-|        |       |    |                             |    |      |        |
-|        |       |    |                             |    |      |        |
-|        |       |    |                             |    |      |        |
-|        |       |    |                             |    |      |        |
 |        |       |    |*****************************|    |      |        |
 |        |       |                                       |      |        |
 |        |       |                                       |      |        |
@@ -88,12 +84,13 @@ reactJS:</br>
 |        | -store new mongo task in state                       |        |
 |        | -call handlesubmit()                                 |        |
 |        |                                                      |        |
-|        |                                                      |        |
-|        |                                                      |        |
-|        |                                                      |        |
-|        |                                                      |        |
-|        |                                                      |        |
-|        |                                                      |        |
+|        |******************************************************|        |
+|                                                                        |
+|                                                                        |
+|                                                                        |
+|        |******************************************************|        |
+|        | Completed Tasks                                      |        |
+|        | -Stores titles of completed projects                 |        |
 |        |                                                      |        |
 |        |******************************************************|        |
 |                                                                        |

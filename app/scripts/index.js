@@ -1,21 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, browserHistory } from 'react-router';
 
-//import weeklyCalendar from './weeklyCalendar';
-import weeklyTaskList from './weeklyTaskList';
-import taskEdit from './taskEdit';
+import WeeklyCalendar from './WeeklyCalendar';
+import TaskEdit from './TaskEdit';
 
 import '../css/base.css';
 
 
-ReactDOM.render(<WeeklyCalendar WeeklyList={[["one","two","three"],["ein","swei","drei"],["un","deux","treis"]]} />, document.getElementById('root'));
-/*
+
+
 ReactDOM.render((
         <Router history={browserHistory}>
-            <Route path="/" component={weeklyCalendar}/>
-            <Route path="/:id" component = {taskEdit}/>
+            <Route path="/" component={WeeklyCalendar}/>
+            <Route path="/:id" component = {TaskEdit}/>
         </Router>
     ), document.getElementById('content')
 );
-*/

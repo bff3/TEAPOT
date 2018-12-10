@@ -16,25 +16,14 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var app = express();
-var data;
+var data = {
+    "weeklyTaskList": [],
+    "completedTasks": []
+  };
 var db;
 var MongoPassword = process.env.MONGO_PASSWORD;
 var APP_PATH = path.join(__dirname, 'dist');
 
-
-
-MongoClient.connect('mongodb://cs336:' + MongoPassword + '@ds155653.mlab.com:55653/cs336', function (err, client){
-  if (err) {throw err;}
-
-  db = client.db('cs336')
-
-  db.collection('project').find().toArray(function (err, result){
-    if (err) throw err
-
-    data = result;
-  })
-
-});
 
 app.set('port', (process.env.PORT || 3000));
 app.use('/', express.static(APP_PATH));
@@ -53,19 +42,50 @@ app.use(function(req, res, next) {
 });
 
 app.get('/api/tasks', function(req, res) {
-    db.collection("project").find({}).toArray(function(err, result){
-      if (err) throw err
-        data = result
-    })
-
-      res.json(data);
-
+  db.collection("project").find({"Complete":"Yes"}).toArray(function(err, result){
+    if (err) throw err
+      data.completedTasks = result;
+  })
+  db.collection("project").find({"Complete":"No","Day":"Monday"}).toArray(function(err, result){
+    if (err) throw err
+      data.weeklyTaskList.push(result);
+  })
+  db.collection("project").find({"Complete":"No","Day":"Tuesday"}).toArray(function(err, result){
+    if (err) throw err
+      data.weeklyTaskList.push(result);
+  })
+  db.collection("project").find({"Complete":"No","Day":"Wednesday"}).toArray(function(err, result){
+    if (err) throw err
+      data.weeklyTaskList.push(result);
+  })
+  db.collection("project").find({"Complete":"No","Day":"Thursday"}).toArray(function(err, result){
+    if (err) throw err
+      data.weeklyTaskList.push(result);
+  })
+  db.collection("project").find({"Complete":"No","Day":"Friday"}).toArray(function(err, result){
+    if (err) throw err
+    data.weeklyTaskList.push(result);
+  })
+  db.collection("project").find({"Complete":"No","Day":"Saturday"}).toArray(function(err, result){
+    if (err) throw err
+      data.weeklyTaskList.push(result);
+  })
+  db.collection("project").find({"Complete":"No","Day":"Sunday"}).toArray(function(err, result){
+    if (err) throw err
+      data.weeklyTaskList.push(result);
+  })
+  //console.log(JSON.stringify(data));
+  res.json(data);
+  data = {
+      "weeklyTaskList": [],
+      "completedTasks": []
+    };
 });
 
 app.post('/api/tasks', function(req, res) {
     var collection = db.collection('project');
 
-    collection.insertOne({"Id":Date.now(), "Type": req.body.type, "Day": req.body.day, "Class": req.body.class, "Title": req.bod.title, "Description":req.body.description, "Urgency": req.body.urgency, "Complete": "NotComplete"});
+    collection.insertOne({"id":Date.now(), "Type": req.body.Type, "Day": req.body.Day, "Class": req.body.Class, "Title": req.bod.Title, "Description":req.body.Description, "Urgency": req.body.Urgency, "Complete": "No"});
 
     db.collection('project').find().toArray(function (err, result){
       if (err) throw err;
@@ -77,7 +97,7 @@ app.post('/api/tasks', function(req, res) {
 });
 
 app.get('/api/tasks/:id', function(req, res) {
-    db.collection('project').find({"Id": Number(req.params.id)}).toArray(function(err, docs) {
+    db.collection('project').find({"id": Number(req.params.id)}).toArray(function(err, docs) {
         if (err) throw err;
         res.json(docs);
     });
@@ -86,6 +106,16 @@ app.get('/api/tasks/:id', function(req, res) {
 app.put('/api/tasks/:id', function(req, res) {
     var updateId = Number(req.params.id);
     var update = req.body;
+/*    db.collection('project').find({"id": Number(req.params.id)}).toArray(function(err, docs){
+      if (err) throw err;
+      if (docs.count() == 1){
+        if (update.Complete == "Complete"){
+          db.collection('completed').insertOne({update});
+          db.collection('project').deleteOne({"id": updateID});
+        }
+      }
+    })*/
+
     db.collection('project').updateOne(
         { id: updateId },
         { $set: update },
@@ -100,7 +130,7 @@ app.put('/api/tasks/:id', function(req, res) {
 
 app.delete('/api/tasks/:id', function(req, res) {
     db.collection('project').deleteOne(
-        {'Id': Number(req.params.id)},
+        {'id': Number(req.params.id)},
         function(err, result) {
             if (err) throw err;
             db.collection("project").find({}).toArray(function(err, docs) {
@@ -113,5 +143,17 @@ app.delete('/api/tasks/:id', function(req, res) {
 app.use('*', express.static(APP_PATH));
 
 app.listen(app.get('port'), function() {
+  MongoClient.connect('mongodb://cs336:' + MongoPassword + '@ds155653.mlab.com:55653/cs336', function (err, client){
+    if (err) {throw err;}
+
+    db = client; //.db('cs336')
+    /*
+    db.collection('project').find().toArray(function (err, result){
+      if (err) throw err
+
+      data = result;
+    })
+*/
+  });
     console.log('Server started: http://localhost:' + app.get('port') + '/');
 });
