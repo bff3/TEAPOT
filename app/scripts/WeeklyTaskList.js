@@ -1,5 +1,6 @@
 import React from 'react';
 import DailyTaskList from './DailyTaskList';
+import '../css/base.css';
 
 module.exports = React.createClass({
   render: function() {
