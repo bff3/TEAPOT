@@ -8,7 +8,6 @@ import '../css/base.css';
 
 module.exports = React.createClass({
   render: function() {
-    console.log("props id " + this.props.id);
     return (
 
       <div className="Task">

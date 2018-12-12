@@ -35,6 +35,9 @@ h2 {
 .CompletedTasks > h2 {
   font-size: 1.5em;
 }
+.pDescription{
+  font-style: italic;
+}
 /*LAYOUT*/
 html, body, #content, .WeeklyCalendar {
 	overflow: visible;
@@ -175,6 +178,17 @@ select:hover, select:active {
  opacity: .5;
 }
 
+.TaskDescription{
+  background: white;
+  border-radius: 8px;
+  padding: 1em;
+  margin: 1em;
+  background-size: cover; 
+}
+
+.TaskEdit > h2 {
+  margin: 0.25em;
+}
 @media all and (max-width: 1175px) {
     .WeeklyTaskList, #Calendar, #Tasks{
         flex-direction: column;

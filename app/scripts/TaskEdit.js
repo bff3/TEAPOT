@@ -93,7 +93,7 @@ module.exports = React.createClass({
     },
     render: function () {
         return (
-            <div>
+            <div className="TaskForm">
                 <form className="TaskEdit">
                     <h1>{this.state.Title}</h1>
                     <div className= "TaskDescription">
@@ -159,10 +159,6 @@ module.exports = React.createClass({
                         <option value="Urgent">Urgent</option>
                         <option value= "NotUgent"> Not urgent</option>
                     </select>
-
-                    <br/>
-                    <button type="button" onClick={this.handleUpdate}>Update
-                    </button>
                     <select
                       selected = ""
                       value = {this.state.Complete}
@@ -171,6 +167,9 @@ module.exports = React.createClass({
                         <option value="Yes">Complete</option>
                         <option value="No">Not Complete</option>
                     </select>
+                    <br/>
+                    <button type="button" onClick={this.handleUpdate}>Update
+                    </button>
                     <button type="button" onClick={this.handleDelete}>Delete
                     </button>
                 </form>

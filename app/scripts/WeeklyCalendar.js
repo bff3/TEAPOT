@@ -56,6 +56,7 @@ module.exports = React.createClass({
       }.bind(this));
   },
   componentDidMount: function() {
+    console.log("is mounted: " + this.state._isMounted);
     this.state._isMounted = true;
     this.loadTasksFromServer();
     setInterval(this.loadTasksFromServer, POLL_INTERVAL);
@@ -64,7 +65,6 @@ module.exports = React.createClass({
     this.state._isMounted = false;
   },
   render: function() {
-    console.log(JSON.stringify(this.state.data));
     return (
       <div className="WeeklyCalendar">
         <div id="Header">
