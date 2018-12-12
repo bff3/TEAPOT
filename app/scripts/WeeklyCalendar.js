@@ -66,13 +66,18 @@ module.exports = React.createClass({
   render: function() {
     console.log(JSON.stringify(this.state.data));
     return (
-      <div className="Weekly Calendar">
-        <h1>Tracking Every Assignment:</h1>
-        <br/>
-        <h1>Progress Over Time!</h1>
-        <WeeklyTaskList WeeklyList={this.state.data.weeklyTaskList} />
-        <TaskForm onTaskSubmit={this.handleTaskSubmit}/>
-        <CompletedTasks completedTasks={this.state.data.completedTasks} />
+      <div className="WeeklyCalendar">
+        <div id="Header">
+          <h1>Tracking Every Assignment:</h1>
+          <h1>Progress Over Time!</h1>
+        </div>
+        <div id="Calendar">
+          <div id="Tasks">
+            <WeeklyTaskList WeeklyList={this.state.data.weeklyTaskList} />
+            <CompletedTasks completedTasks={this.state.data.completedTasks} />
+          </div>
+          <TaskForm onTaskSubmit={this.handleTaskSubmit}/>
+        </div>
       </div>
     );
   }

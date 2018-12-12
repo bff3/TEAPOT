@@ -15,7 +15,7 @@ module.exports = React.createClass({
     }
     //console.log(days);
     return (
-      <div className="WeeklyCalendar">
+      <div className="WeeklyTaskList">
         {days}
       </div>
     );
