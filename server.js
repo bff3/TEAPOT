@@ -24,9 +24,9 @@ var db;
 var MongoPassword = process.env.MONGO_PASSWORD;
 var APP_PATH = path.join(__dirname, 'dist');
 
-
 app.set('port', (process.env.PORT || 3000));
 app.use('/', express.static(APP_PATH));
+app.use('/icon.png', express.static(path.join(__dirname, 'icon.png')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
