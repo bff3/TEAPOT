@@ -95,7 +95,18 @@ module.exports = React.createClass({
         return (
             <div>
                 <form className="TaskEdit">
-                    <h1>{this.props.params.Title}</h1>
+                    <h1>{this.state.Title}</h1>
+                    <div className= "TaskDescription">
+                        <p className ="info">
+                            {this.state.Type} Date: {this.state.Day}<br/>
+                            Class: {this.state.Class}<br/>
+                            Urgency: {this.state.Urgency}<br/>
+                        </p>
+                        <p className = "pDescription">{this.state.Description}</p>
+                    </div>
+
+                    <h2>Edit:</h2>
+
                     <select
                       selected = ""
                       value = {this.state.Type}
